@@ -63,9 +63,9 @@
                     <span class="mr-2">M</span>
                     <input class=" leading-tight"
                            v-model="student.gender"
-                           value="L"
+                           value="F"
                            type="radio">
-                    <span>L</span>
+                    <span>F</span>
                     <span> {{ validationError.gender }} </span>
                   </div>
                 </div>
