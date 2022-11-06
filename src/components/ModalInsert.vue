@@ -115,7 +115,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import {
   TransitionRoot,
   TransitionChild,
@@ -147,6 +147,16 @@ function closeModal() {
 const uploadFile = (e) => {
   form.value.avatar_url = e.target.files[0]
 }
+function IsEmptyOrWhiteSpace(str) {
+  return (str.match(/^\s*$/) || []).length > 0;
+}
+watchEffect(() => {
+  if (IsEmptyOrWhiteSpace(form.value.date_of_birth.toString())) {
+    validationError.value.date_of_birth = "cannot be blank."
+  } else {
+    validationError.value.date_of_birth = ""
+  }
+})
 const emit = defineEmits(['regetStudent'])
 const studentStore = useStudentStore()
 const isStore = ref(false)

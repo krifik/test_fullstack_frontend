@@ -105,8 +105,9 @@
                 </div>
                 <div class="mt-4">
                   <button type="submit"
-                          class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                          :disabled="isUpdate">
+                          class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                          :class="[isUpdate || validationError.date_of_birth === 'cannot be blank.' ? '':'         hover:bg-blue-200']"
+                          :disabled="isUpdate || validationError.date_of_birth === 'cannot be blank.'">
                     Submit!
                   </button>
                 </div>
@@ -120,7 +121,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watchEffect } from 'vue'
 import {
   TransitionRoot,
   TransitionChild,
@@ -162,6 +163,18 @@ const uploadFile = (e) => {
   let preview = document.getElementById("preview")
   preview.src = src
 }
+function IsEmptyOrWhiteSpace(str) {
+  return (str.match(/^\s*$/) || []).length > 0;
+}
+watchEffect(() => {
+  if (student.value) {
+    if (IsEmptyOrWhiteSpace(student.value.date_of_birth.toString())) {
+      validationError.value.date_of_birth = "cannot be blank."
+    } else {
+      validationError.value.date_of_birth = ""
+    }
+  }
+})
 const isUpdate = ref(false)
 const updateStudentById = (student_id) => {
   isUpdate.value = true
