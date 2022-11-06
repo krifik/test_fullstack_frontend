@@ -1,7 +1,39 @@
-# Vue 3 + Vite
+# Frontend build with Vue
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-## Recommended IDE Setup
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+## Installation
+
+clone this repository
+
+```bash
+git clone https://github.com/krifik/test_fullstack_frontend.git
+```
+cd to directory that been cloned
+```bash
+cd test_fullstack_frontend
+```
+install depency
+```
+npm run install
+```
+
+build project
+```
+npm run build
+```
+## Usage
+rename .env.example to .env and edit up to you
+
+then, run preview server
+```
+npm run preview
+```
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
