@@ -4,7 +4,7 @@
                        :isModalAlertOpen="isModalAlertOpen" />
     <ModalEdit v-if="isModalEditOpen"
                :isModalEditOpen="isModalEditOpen"
-               @close="isModalEditOpen = false" />
+               @close-modal="isModalEditOpen = false" />
     <table class="md:w-full w-full lg:w-full h-10 table-fixed overflow-y-scroll">
       <thead>
         <tr>
@@ -124,15 +124,20 @@ const isModalAlertOpen = ref(false)
 const isModalEditOpen = ref(false)
 const router = useRouter()
 const deleteById = (id) => {
-  studentStore.deleteStudentById(id).then((res) => {
-    emit("regetStudents")
-    isModalAlertOpen.value = true
-    setTimeout(() => {
-      isModalAlertOpen.value = false
-    }, 5000)
-  })
+  const isConfirm = confirm("Yakin akan mendelete data ini?")
+  if (isConfirm) {
+
+    studentStore.deleteStudentById(id).then((res) => {
+      emit("regetStudents")
+      isModalAlertOpen.value = true
+      setTimeout(() => {
+        isModalAlertOpen.value = false
+      }, 5000)
+    })
+  }
 }
 const openModalEdit = (id) => {
+
   studentStore.getStudentById(id).then((res) => {
     isModalEditOpen.value = true
 
