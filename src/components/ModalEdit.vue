@@ -3,7 +3,7 @@
                   :show="isOpen"
                   as="template">
     <Dialog as="div"
-            @close="closeModal"
+            @close="$emit('close-modal')"
             class="relative z-10">
       <TransitionChild as="template"
                        enter="duration-300 ease-out"
@@ -139,7 +139,7 @@ const props = defineProps({
   student_id: Number
 })
 const router = useRouter()
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'close-modal'])
 const student = ref(null)
 const parseDate = ref(null)
 onMounted(() => {
@@ -181,7 +181,7 @@ const updateStudentById = (student_id) => {
   isOpen.value = false
   student.value.avatar_url = file.value
   studentStore.updateStudentById(student_id, student.value).then((res) => {
-    emit("close")
+    emit("close-modal")
     isOpen.value = false
     studentStore.getAllDataStudent()
     router.push({ name: "student" })
